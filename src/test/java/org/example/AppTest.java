@@ -36,7 +36,7 @@ public class AppTest extends TestCase {
         String sum = app._sum();
         String mult = app._mult();
 
-        assertEquals("100", min);
+        assertEquals("1", min);
         assertEquals("5", max);
         assertEquals("15", sum);
         assertEquals("120", mult);
