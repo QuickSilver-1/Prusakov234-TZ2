@@ -24,11 +24,21 @@ jobs:
       run: mvn -B package --file pom.xml
       
     - name: Run tests
-      run: mvn test
+      run: mvn test || echo "::set-output name=test-result::$(echo $?)"
+      id: tests
 
-    - name: "telegram"
+    - name: "telegram-success"
+      if: success()
       uses: "appleboy/telegram-action@master"
       with:
         to: ${{ secrets.USER_ID }}
         token: ${{ secrets.BOT_TOKEN }}
         args: Новая версия успешно загружена в репозиторий
+
+    - name: "telegram-failure"
+      if: failure()
+      uses: "appleboy/telegram-action@master"
+      with:
+        to: ${{ secrets.USER_ID }}
+        token: ${{ secrets.BOT_TOKEN }}
+        args: Тесты не прошли, код ошибки: ${{ steps.tests.outputs.test-result }}
