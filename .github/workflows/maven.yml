@@ -45,4 +45,4 @@ jobs:
       with:
         to: ${{ secrets.USER_ID }}
         token: ${{ secrets.BOT_TOKEN }}
-        args: "Тесты не прошли. Код ошибки: ${{steps.tests.outputs.status}}"
+        args: Тесты не прошли. Посмотрите ошибку в логах
