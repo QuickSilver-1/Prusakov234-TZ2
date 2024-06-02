@@ -1,7 +1,7 @@
 <h2>Техническое задание №2</h2>
 
+[![Version](https://badge.fury.io/gh/QuickSilver-1%2FTZ.svg)](https://github.com/QuickSilver-1/TZ/releases/)
 ![Build Status](https://github.com/QuickSilver-1/TZ/actions/workflows/maven.yml/badge.svg)
-[![Version](https://badge.fury.io/gh/QuickSilver-1%2FTZ.svg)](https://github.com/QuickSilver-1/TZ/releases)
 
 <h3>Часть №1 Тестирование (стоит 5 баллов из 10)</h3>
 Реализуйте на Java простейшую программу, которая будет считывать из файла числа, а далее отдельными функциями искать среди этих чисел минимальное число, максимальное число, считать их общую сумму и произведение.
