@@ -20,11 +20,27 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
         cache: maven
+    - name: Run File and collect logs
+      id: run
+      run:  |
+        echo Running File...
+        status=$(python script.py > log.txt 2>&1; echo $?)
+        cat log.txt
+        echo ::set-output name=status::$status
+    - name: Commit log
+      run: |
+        git config --global user.name 'GitHub Action'
+        git config --global user.email 'action@github.com'
+        git add -A
+        git checkout master
+        git diff-index --quiet HEAD || git commit -am "deploy workflow logs"
+        git push
+
     - name: Build with Maven
       run: mvn -B package --file pom.xml
       
     - name: Run tests
-      run: mvn test 2> error.log || echo "::set-output name=test-result::$(cat error.log)"
+      run: mvn test
       id: tests
 
     - name: "telegram-success"
@@ -33,12 +49,12 @@ jobs:
       with:
         to: ${{ secrets.USER_ID }}
         token: ${{ secrets.BOT_TOKEN }}
-        args: "Новая версия успешно загружена в репозиторий"
+        args: Новая версия успешно загружена в репозиторий
 
     - name: "telegram-failure"
-      if: failure()
+      if: steps.run.outputs.status != '0'
       uses: "appleboy/telegram-action@master"
       with:
         to: ${{ secrets.USER_ID }}
         token: ${{ secrets.BOT_TOKEN }}
-        args: "Тесты не прошли, ошибка: ${{ steps.tests.outputs.test-result }}"
+        args: Тесты не прошли ${{steps.run.outputs.status}}
