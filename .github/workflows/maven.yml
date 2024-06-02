@@ -52,7 +52,7 @@ jobs:
         args: Новая версия успешно загружена в репозиторий
 
     - name: "telegram-failure"
-      if: steps.run.outputs.status != '0'
+      if: failure()
       uses: "appleboy/telegram-action@master"
       with:
         to: ${{ secrets.USER_ID }}
