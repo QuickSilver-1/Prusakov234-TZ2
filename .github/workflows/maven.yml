@@ -1,4 +1,4 @@
-name: Java CI with Maven
+name: Java File-scanner
 
 on:
   push:
@@ -25,19 +25,19 @@ jobs:
       run: mvn -B package --file pom.xml
       
     - name: Run tests
+      id: tests
       run: |
         mvn test
         status=$?
-        echo "status=${status}" >> "$GITHUB_OUTPUT"
-      id: tests
-
+        echo "::set-output name=status::${status}"
+        
     - name: "telegram-success"
       if: success()
       uses: "appleboy/telegram-action@master"
       with:
         to: ${{ secrets.USER_ID }}
         token: ${{ secrets.BOT_TOKEN }}
-        args: Новая версия успешно загружена в репозиторий
+        args: "Новая версия успешно загружена в репозиторий"
 
     - name: "telegram-failure"
       if: failure()
@@ -45,4 +45,4 @@ jobs:
       with:
         to: ${{ secrets.USER_ID }}
         token: ${{ secrets.BOT_TOKEN }}
-        args: Тесты не прошли ${{steps.run.outputs.status}}
+        args: "Тесты не прошли. Код ошибки: ${{steps.tests.outputs.status}}"
