@@ -24,7 +24,7 @@ jobs:
       run: mvn -B package --file pom.xml
       
     - name: Run tests
-      run: mvn test || echo "::set-output name=test-result::$(echo $?)"
+      run: mvn test 2> error.log || echo "::set-output name=test-result::$(cat error.log)"
       id: tests
 
     - name: "telegram-success"
@@ -41,4 +41,4 @@ jobs:
       with:
         to: ${{ secrets.USER_ID }}
         token: ${{ secrets.BOT_TOKEN }}
-        args: "Тесты не прошли, код ошибки: ${{ steps.tests.outputs.test-result }}"
+        args: "Тесты не прошли, ошибка: ${{ steps.tests.outputs.test-result }}"
