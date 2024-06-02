@@ -1,6 +1,6 @@
 <h2>Техническое задание №2</h2>
 
-[![Version](https://badge.fury.io/gh/QuickSilver-1%2FTZ.svg)](https://github.com/QuickSilver-1/TZ/releases/)
+![Static Badge](https://img.shields.io/badge/version-1.0.0-73c549?link=https%3A%2F%2Fgithub.com%2FQuickSilver-1%2FTZ%2Freleases%2F)
 ![Build Status](https://github.com/QuickSilver-1/TZ/actions/workflows/maven.yml/badge.svg)
 
 <h3>Часть №1 Тестирование (стоит 5 баллов из 10)</h3>
