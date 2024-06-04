@@ -47,7 +47,7 @@ public class AppTest extends TestCase {
         for (int i = 0; i < 8; i++) {
             App app = new App("src/test/java/org/example/test.txt");
             duration = System.nanoTime();
-            app._mult();
+            app._min();
             duration = System.nanoTime() - duration;
             System.out.printf("1%s чисел - %d мс%n", "0".repeat(i), duration/1000000);
 
@@ -64,7 +64,7 @@ public class AppTest extends TestCase {
         for (int i = 0; i < 8; i++) {
             App app = new App("src/test/java/org/example/test.txt");
             duration = System.nanoTime();
-            app._mult();
+            app._min();
             duration = System.nanoTime() - duration;
             System.out.printf("1%s чисел - %d мс%n", "0".repeat(i), duration/1000000);
 
@@ -81,7 +81,7 @@ public class AppTest extends TestCase {
         for (int i = 0; i < 8; i++) {
             App app = new App("src/test/java/org/example/test.txt");
             duration = System.nanoTime();
-            app._mult();
+            app._sum();
             duration = System.nanoTime() - duration;
             System.out.printf("1%s чисел - %d мс%n", "0".repeat(i), duration/1000000);
 
